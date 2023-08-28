@@ -142,7 +142,7 @@ void pulseshape()
   for(unsigned int i=1; i<=250; i++)
   {
     //h1_2018he->SetBinContent(i, SiPMShapeData2018[i-1]);
-    h1_2018he->SetBinContent(i+14, SiPMShapeData2018[i-1]);
+    h1_2018he->SetBinContent(i+18, SiPMShapeData2018[i-1]);
   }
 
   // HB
@@ -164,14 +164,16 @@ void pulseshape()
   h1_2018he_rebin->Rebin(25);
   h1_2018hb_rebin->Rebin(25);
   
-  cout << "he: " << h1_2018he_rebin->GetBinContent(2) << endl;
-  cout << "hb: " << h1_2018hb_rebin->GetBinContent(2) << endl;
-
-  int n_bins = h1_2018he_rebin->GetNbinsX();
-  for (int i = 1; i <= n_bins; i++) {
+  cout << "HB charge fractions: ";
+  for (int i = 1; i <= h1_2018hb_rebin->GetNbinsX(); i++) {
+    cout << h1_2018hb_rebin->GetBinContent(i) << ", ";
+  }
+  cout << endl;
+  cout << "HE charge fractions: ";
+  for (int i = 1; i <= h1_2018he_rebin->GetNbinsX(); i++) {
     cout << h1_2018he_rebin->GetBinContent(i) << ", ";
   }
-
+  cout << endl;
   
   TCanvas *c = new TCanvas("c","c",600,400);
   c->cd(1);
